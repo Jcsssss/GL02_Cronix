@@ -12,4 +12,4 @@ CHARLET-SOMLETTE Jules.
 
  Javascript
 
- https://commons.wikimedia.org/wiki/File:Javascript-736400_960_720.png?uselang=fr<img width="330" height="330" alt="image" src="https://github.com/user-attachments/assets/946cfdb7-818f-4dfc-b0a6-d5c25362e974" />
+ <img width="100" height="100" alt="image" src="https://github.com/user-attachments/assets/946cfdb7-818f-4dfc-b0a6-d5c25362e974" />
