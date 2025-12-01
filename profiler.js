@@ -1,7 +1,5 @@
 // profiler.js
-// Génère le profil statistique d'une banque GIFT
-// Compatibilité multi-gap : chaque { ... } = une question
-// Ignore les blocs sans réponse (instructions, énoncés globaux)
+// Génère le profil statistique à partir des fichiers GIFT
 
 import fs from "fs";
 import path from "path";
@@ -10,7 +8,6 @@ import { classifyQuestion } from "./questionClassifier.js";
 
 export function profileFromFiles(inputs) {
 
-  // Compteurs par type
   const counts = {
     multiple: 0,
     vrai_faux: 0,
@@ -25,7 +22,7 @@ export function profileFromFiles(inputs) {
   let total = 0;
   const giftFiles = [];
 
-  // Collecte des fichiers .gift
+  // Collecte des fichiers
   for (const input of inputs) {
     const stat = fs.statSync(input);
 
@@ -34,7 +31,7 @@ export function profileFromFiles(inputs) {
         .filter(f => f.endsWith(".gift"))
         .map(f => path.join(input, f));
       giftFiles.push(...files);
-    } else {
+    } else if (input.endsWith(".gift")) {
       giftFiles.push(input);
     }
   }
@@ -44,20 +41,20 @@ export function profileFromFiles(inputs) {
     const questions = parseGiftFile(file);
 
     for (const q of questions) {
-
-      // Ignore les “fausses questions” (pas de bloc {…})
-      if (!q.data || q.data.trim() === "") continue;
+      if (!q.answers || q.answers.length === 0) continue;
 
       const type = classifyQuestion(q);
-      counts[type] = (counts[type] || 0) + 1;
+
+      if (!counts[type]) counts[type] = 0;
+      counts[type]++;
       total++;
     }
   }
 
-  // Calcul des pourcentages
+  // Pourcentages
   const percentages = {};
   for (const t in counts) {
-    percentages[t] = total > 0 ? +(counts[t] / total * 100).toFixed(1) : 0;
+    percentages[t] = total > 0 ? Number(((counts[t] / total) * 100).toFixed(1)) : 0;
   }
 
   return {
