@@ -1,39 +1,51 @@
 // questionClassifier.js
-
-/*
-Ce programme analyse le bloc answers pour identifier le type parmi :
-- Vrai/faux
-- Matching (= et ->)
-- Numérique (#12, #10)
-- Multiple (Réponses par = pour bonnes et ~ pour mauvaises)
-- Mot manquant (texte hors accolades + réponse courte)
-- Courte (une ou plusieurs réponses avec = mais sans MCQ complet)
-- Ouverte (aucune accolade)
-- Inconnu (rien ne matche) 
-*/
-
+// Classification basée sur les blocs réponses
 
 export function classifyQuestion(q) {
-  // 1) Si le type est explicitement donné (MC, SA, etc.)
-  if (q.qtype === "MC") return "multiple";
-  if (q.qtype === "SA") return "courte";
-  if (q.qtype === "NUM" || q.qtype === "NR") return "numerique";
+  if (!q.answers || q.answers.length === 0) {
+    return "inconnu";
+  }
 
-  const a = q.data;
+  const a = q.answers.join("\n");
 
-  if (!a) return "ouverte";
+  // Matching { =A -> B ... }
+  if (/->/.test(a)) {
+    return "appariement";
+  }
 
-  // 2) Numérique GIFT
-  if (/#-?\d+/.test(a)) return "numerique";
+  // Vrai/Faux
+  if (/\b(true|false)\b/i.test(a) || /(T|F)\b/.test(a)) {
+    return "vrai_faux";
+  }
 
-  // 3) Matching
-  if (/=.+->.+/s.test(a)) return "appariement";
+  // Multiple choice (GIFT standard : ~ mauvais, = bon)
+  if (/[\n\s]*[~|=]/.test(a)) {
+    // s'il y a au moins une mauvaise "~"
+    if (a.includes("~")) return "multiple";
+    // Un seul "=" sans "~" = short answer déguisée
+  }
 
-  // 4) Multiple-choice GIFT
-  if (/=/.test(a) && /~/.test(a)) return "multiple";
+  // Short Answer : {=mot}, {=mot1|mot2}
+  if (/^=/.test(a) || a.includes("|")) {
+    // Certaines short answers sont longues -> classer SA = "courte"
+    return "courte";
+  }
 
-  // 5) Courte answer simple (=xxx)
-  if (/=/.test(a)) return "courte";
+  // Mot manquant (cloze), souvent HTML
+  if (q.text.includes("_____") || q.text.includes("gap") || /<i>/.test(q.text)) {
+    return "mot_manquant";
+  }
 
+  // Numérique : {#10} ou {=10:5}
+  if (/#[0-9]/.test(a) || /=\d+:\d+/.test(a)) {
+    return "numerique";
+  }
+
+  // Longue réponse ou transformation
+  if (a.length > 60) {
+    return "ouverte";
+  }
+
+  // Dernier recours
   return "inconnu";
 }
