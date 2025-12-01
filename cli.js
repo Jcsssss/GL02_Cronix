@@ -10,10 +10,10 @@ import fs from "fs";
 import { createCanvas } from "canvas";
 import { profileFromFiles } from "./profiler.js";
 import { compareProfiles } from "./comparator.js";
+import { printComparison } from "./comparator.js";
 
-// -------------------------------------------------------
 // ANSI COLORS
-// -------------------------------------------------------
+
 const COLORS = {
   reset: "\x1b[0m",
   red: "\x1b[31m",
@@ -29,9 +29,8 @@ function colorize(text, color) {
   return COLORS[color] + text + COLORS.reset;
 }
 
-// -------------------------------------------------------
 // ASCII HISTOGRAM (avec ou sans couleurs)
-// -------------------------------------------------------
+
 function printAsciiHistogram(percentages, useColor = false) {
   console.log("\nHistogramme des types de questions (ordre décroissant) :\n");
 
@@ -57,9 +56,8 @@ function printAsciiHistogram(percentages, useColor = false) {
   console.log("");
 }
 
-// -------------------------------------------------------
 // CSV EXPORT
-// -------------------------------------------------------
+
 function exportCsv(profile, filePath) {
   const lines = ["type,count,percentage"];
 
@@ -71,9 +69,8 @@ function exportCsv(profile, filePath) {
   console.log(`CSV exporté → ${filePath}`);
 }
 
-// -------------------------------------------------------
 // PNG EXPORT (bar chart)
-// -------------------------------------------------------
+
 function exportPng(profile, filePath) {
   const width = 900;
   const height = 500;
@@ -128,9 +125,8 @@ function exportPng(profile, filePath) {
   console.log(`PNG exporté → ${filePath}`);
 }
 
-// -------------------------------------------------------
 // CLI
-// -------------------------------------------------------
+
 const [, , command, ...args] = process.argv;
 
 if (command === "profile") {
@@ -175,11 +171,12 @@ else if (command === "compare") {
   }
 
   const [target, baseline] = args;
-  const comparison = compareProfiles(target, baseline);
+  const diff = compareProfiles(target, baseline);
 
-  fs.writeFileSync("comparison.json", JSON.stringify(comparison, null, 2));
+  fs.writeFileSync("comparison.json", JSON.stringify(diff, null, 2));
   console.log("Comparaison générée : comparison.json");
 
+  printComparison(diff);
 }
 else {
   console.log("Commandes disponibles :");
