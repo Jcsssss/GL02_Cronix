@@ -1,39 +1,49 @@
 // comparator.js
 import fs from "fs";
 
-export function compareProfiles(targetPath, baselinePath) {
-  const target = JSON.parse(fs.readFileSync(targetPath, "utf8"));
-  const baseline = JSON.parse(fs.readFileSync(baselinePath, "utf8"));
+export function compareProfiles(targetFile, baselineFile) {
+  const A = JSON.parse(fs.readFileSync(targetFile, "utf8"));
+  const B = JSON.parse(fs.readFileSync(baselineFile, "utf8"));
 
-  const types = new Set([
-    ...Object.keys(target.percentages),
-    ...Object.keys(baseline.percentages)
-  ]);
+  const diff = {};
 
-  const result = {};
-
-  let sumAbsDiff = 0;
-
-  for (const t of types) {
-    const a = target.percentages[t] || 0;
-    const b = baseline.percentages[t] || 0;
-    const diff = +(a - b).toFixed(1);
-
-    sumAbsDiff += Math.abs(diff);
-
-    result[t] = {
-      target: a,
-      baseline: b,
-      diff
+  for (const type in A.counts) {
+    diff[type] = {
+      baseline: B.percentages[type],
+      target: A.percentages[type],
+      delta: +(A.percentages[type] - B.percentages[type]).toFixed(1)
     };
   }
 
-  const score_ecart = +(sumAbsDiff / 2).toFixed(1);
+  return diff;
+}
 
-  return {
-    target: targetPath,
-    baseline: baselinePath,
-    per_type: result,
-    score_ecart
+export function printComparison(diff) {
+  console.log("\n Comparaison visuelle des deux banques\n");
+
+  const colors = {
+    green: "\x1b[32m",
+    red: "\x1b[31m",
+    reset: "\x1b[0m"
   };
+
+  for (const type in diff) {
+    const d = diff[type];
+
+    const sign = d.delta > 0
+      ? `${colors.green}+${d.delta}%`
+      : d.delta < 0
+      ? `${colors.red}${d.delta}%`
+      : "0%";
+
+    const barA = "█".repeat(Math.round(d.baseline));
+    const barB = "█".repeat(Math.round(d.target));
+
+    console.log(
+      `${type.padEnd(15)}  `
+      + `A: ${barA} ${d.baseline}%   `
+      + `→   B: ${barB} ${d.target}%   `
+      + `Δ ${sign}${colors.reset}`
+    );
+  }
 }
