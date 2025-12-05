@@ -12,6 +12,24 @@ import { profileFromFiles } from "./profiler.js";
 import { compareProfiles } from "./comparator.js";
 import { printComparison } from "./comparator.js";
 
+import readline from "readline";
+import { CreerHistogramme } from "./CreerHistogramme.js";
+import AfficherProfil from "./AfficherProfil.js";
+import { executerSP3 } from "./GenererFichierIdentification.js";
+
+// Poser une question simple dans la console
+function ask(question) {
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+    terminal: false
+  });
+  return new Promise(resolve => rl.question(question, answer => {
+    rl.close();
+    resolve(answer.trim());
+  }));
+}
+
 // ANSI COLORS
 
 const COLORS = {
@@ -37,7 +55,7 @@ function printAsciiHistogram(percentages, useColor = false) {
   const sorted = Object.entries(percentages).sort((a, b) => b[1] - a[1]);
   const maxTypeLength = Math.max(...sorted.map(([type]) => type.length));
 
-  const colorList = ["cyan", "green", "yellow", "magenta", "blue", "red"];  
+  const colorList = ["cyan", "green", "yellow", "magenta", "blue", "red"];
   let colorIndex = 0;
 
   for (const [type, pct] of sorted) {
@@ -125,61 +143,146 @@ function exportPng(profile, filePath) {
   console.log(`PNG exporté → ${filePath}`);
 }
 
-// CLI
+// =======================================================
+// MAIN CLI (menu + commandes existantes)
+// =======================================================
 
-const [, , command, ...args] = process.argv;
+async function main() {
+  const [, , command, ...args] = process.argv;
 
-if (command === "profile") {
+  // Menu si aucune commande n'est donnée
+  if (!command) {
+    const menu =
+`Choisissez une action :
+1. Générer un histogramme (SP6.2 + SP8.3)
+2. Générer une vCard enseignant (SP3)
+3. Profilage (commande profile)
+4. Comparaison de profils (commande compare)
+0. Quitter
+Votre choix : `;
 
-  const paths = args.filter(a => !a.startsWith("--"));
-  const flags = args.filter(a => a.startsWith("--"));
+    const choix = await ask(menu);
 
-  if (paths.length === 0) {
-    console.error("Usage: node cli.js profile <file|dir> [--ansi] [--csv file.csv] [--png file.png]");
-    process.exit(1);
+    if (choix === "1") {
+      const examPath = await ask("Saisissez le chemin du fichier d'examen (.gift) : ");
+      const profilSimple = CreerHistogramme(examPath);
+
+      if (!profilSimple) {
+        console.error("Error: cannot compute histogram/profile.");
+        process.exit(1);
+      }
+
+      console.log("\nProfile computed (SP6.2) :");
+      console.log(profilSimple);
+
+      console.log("\nDisplay (SP8.3) :");
+      AfficherProfil(profilSimple);
+      process.exit(0);
+    }
+
+    if (choix === "2") {
+      await executerSP3();
+      process.exit(0);
+    }
+
+    if (choix === "3") {
+      console.log("\nUtilisez : node cli.js profile <file|dir> [--ansi] [--csv file.csv] [--png file.png]");
+      process.exit(0);
+    }
+
+    if (choix === "4") {
+      console.log("\nUtilisez : node cli.js compare <target.json> <baseline.json>");
+      process.exit(0);
+    }
+
+    console.log("Au revoir !");
+    process.exit(0);
   }
 
-  const profile = profileFromFiles(paths);
+  // -------------------------------------------------------
+  // Commandes existantes
+  // -------------------------------------------------------
 
-  const useAnsi = flags.includes("--ansi");
+  if (command === "profile") {
 
-  printAsciiHistogram(profile.percentages, useAnsi);
+    const paths = args.filter(a => !a.startsWith("--"));
+    const flags = args.filter(a => a.startsWith("--"));
 
-  fs.writeFileSync("profil.json", JSON.stringify(profile, null, 2));
-  console.log("Profil généré : profil.json");
+    if (paths.length === 0) {
+      console.error("Usage: node cli.js profile <file|dir> [--ansi] [--csv file.csv] [--png file.png]");
+      process.exit(1);
+    }
 
-  // FLAGS
-  const csvFlag = flags.find(f => f.startsWith("--csv"));
-  const pngFlag = flags.find(f => f.startsWith("--png"));
+    const profile = profileFromFiles(paths);
 
-  if (csvFlag) {
-    const file = csvFlag.split("=")[1] || "profil.csv";
-    exportCsv(profile, file);
+    const useAnsi = flags.includes("--ansi");
+
+    printAsciiHistogram(profile.percentages, useAnsi);
+
+    fs.writeFileSync("profil.json", JSON.stringify(profile, null, 2));
+    console.log("Profil généré : profil.json");
+
+    // FLAGS
+    const csvFlag = flags.find(f => f.startsWith("--csv"));
+    const pngFlag = flags.find(f => f.startsWith("--png"));
+
+    if (csvFlag) {
+      const file = csvFlag.split("=")[1] || "profil.csv";
+      exportCsv(profile, file);
+    }
+
+    if (pngFlag) {
+      const file = pngFlag.split("=")[1] || "profil.png";
+      exportPng(profile, file);
+    }
+
   }
+  else if (command === "compare") {
 
-  if (pngFlag) {
-    const file = pngFlag.split("=")[1] || "profil.png";
-    exportPng(profile, file);
+    if (args.length < 2) {
+      console.error("Usage: node cli.js compare <target.json> <baseline.json>");
+      process.exit(1);
+    }
+
+    const [target, baseline] = args;
+    const diff = compareProfiles(target, baseline);
+
+    fs.writeFileSync("comparison.json", JSON.stringify(diff, null, 2));
+    console.log("Comparaison générée : comparison.json");
+
+    printComparison(diff);
   }
+  else if (command === "histogram") {
 
+    if (args.length < 1) {
+      console.error("Usage: node cli.js histogram <exam.gift>");
+      process.exit(1);
+    }
+
+    const examPath = args[0];
+    const profilSimple = CreerHistogramme(examPath);
+
+    if (!profilSimple) {
+      console.error("Error: cannot compute histogram/profile.");
+      process.exit(1);
+    }
+
+    console.log("\nProfile computed (SP6.2) :");
+    console.log(profilSimple);
+
+    console.log("\nDisplay (SP8.3) :");
+    AfficherProfil(profilSimple);
+  }
+  else if (command === "vcard") {
+    await executerSP3();
+  }
+  else {
+    console.log("Commandes disponibles :");
+    console.log("  node cli.js profile <paths> [--ansi] [--csv file] [--png file]");
+    console.log("  node cli.js compare <target.json> <baseline.json>");
+    console.log("  node cli.js histogram <exam.gift>");
+    console.log("  node cli.js vcard");
+  }
 }
-else if (command === "compare") {
 
-  if (args.length < 2) {
-    console.error("Usage: node cli.js compare <target.json> <baseline.json>");
-    process.exit(1);
-  }
-
-  const [target, baseline] = args;
-  const diff = compareProfiles(target, baseline);
-
-  fs.writeFileSync("comparison.json", JSON.stringify(diff, null, 2));
-  console.log("Comparaison générée : comparison.json");
-
-  printComparison(diff);
-}
-else {
-  console.log("Commandes disponibles :");
-  console.log("  node cli.js profile <paths> [--ansi] [--csv file] [--png file]");
-  console.log("  node cli.js compare <target.json> <baseline.json>");
-}
+main();
