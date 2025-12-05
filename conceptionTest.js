@@ -145,7 +145,8 @@ function verifierDifferenceQuestions(testCreated){
 }
 
 function ecrireTestFichier(testCreated){
-    
+    //Ecrire  ::nom du test::\n
+    //Pour chaque question, ecrire ce qu'il y a dans question.raw
 }
 function ask(question) {
   const rl = readline.createInterface({
