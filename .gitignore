@@ -1,0 +1,10 @@
+.DS_Store
+node_modules/
+SujetB_data/
+testAron.js
+baseline.json
+profil.json
+comparison.json
+profil.csv
+profil.png
+
