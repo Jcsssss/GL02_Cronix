@@ -76,9 +76,9 @@ Exemple de sortie :
 Le programme crée le profil des types de questions.
 
 Sortie :
-    - profil.json
-    - un historigramme ASCII
-    - exports optionnels en PNG et/ou CSV 
+ - profil.json
+ - un historigramme ASCII
+ - exports optionnels en PNG et/ou CSV 
 
 3. **Comparaison de profils** (SPEC 8)
 
