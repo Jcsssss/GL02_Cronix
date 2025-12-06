@@ -119,7 +119,7 @@ Tout est centralisé dans
 
 <code> ./results/result_<fichier>_<timestamp>.json</code>
 
-Ce dossier est accesible que par le professeur pour venir regarder les résultats de son étudiant. Chaque fichier contient l'identifiant de l'étudiant, son % de bonnes réponses, son nombre de bonnes réponses, son heure de passage de l'examen ainsi que toutes ses réponses et les réponses attendues détaillées.
+Ce dossier est accessible que par les professeurs pour venir regarder les résultats de leurs étudiants. Chaque fichier contient l'identifiant de l'étudiant, son % de bonnes réponses, son nombre de bonnes réponses, son heure de passage de l'examen ainsi que toutes ses réponses et les réponses attendues détaillées.
 
 **Structure du projet** :
 
