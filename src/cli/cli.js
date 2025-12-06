@@ -13,13 +13,14 @@ import path from "path";
 import readline from "readline";
 import { createCanvas } from "canvas";
 
-import { CreerHistogramme } from "./CreerHistogramme.js";
-import AfficherProfil from "./AfficherProfil.js";
-import { executerSP3 } from "./GenererFichierIdentification.js";
+import { CreerHistogramme } from "../output/CreerHistogramme.js";
+import AfficherProfil from "../output/AfficherProfil.js";
+import * as sp3 from "../output/GenererFichierIdentification.js";
 
-import { profileFromFiles } from "./profiler.js";
-import { compareProfiles, printComparison } from "./comparator.js";
-import { simulateGiftTest } from "./simulateExam.js";
+
+import { profileFromFiles } from "../core/profiler.js";
+import { compareProfiles, printComparison } from "../core/comparator.js";
+import { simulateGiftTest } from "../core/simulateExam.js";
 
 // Utilitaire question CLI
 function ask(question) {
@@ -162,7 +163,14 @@ Votre choix : `
     }
 
     if (choix === "2") {
-      await executerSP3();
+      console.log("\nGénération vCard enseignant (SP3) ...");
+      if (typeof sp3 === "function") {
+        await sp3();
+      } else if (sp3 && typeof sp3.executerSP3 === "function") {
+        await sp3.executerSP3();
+      } else {
+        console.log("SP3 non disponible.");
+      }
       process.exit(0);
     }
 
@@ -254,6 +262,35 @@ Votre choix : `
     fs.writeFileSync(out, JSON.stringify(report, null, 2));
     console.log(`\nSimulation terminée. Rapport enregistré → ${out}\n`);
 
+    return;
+  }
+
+
+  if (command === "histogram") {
+    if (!args[0]) {
+      console.log("Usage: node cli.js histogram <file.gift>");
+      process.exit(1);
+    }
+
+    const file = args[0];
+    const profil = CreerHistogramme(file);
+    console.log("\nProfil obtenu :\n", profil);
+    console.log("\nAffichage ASCII :");
+    AfficherProfil(profil);
+
+    return;
+  }
+
+
+  if (command === "vcard") {
+    console.log("\nGénération vCard enseignant (SP3) ...");
+    if (typeof sp3 === "function") {
+      await sp3();
+    } else if (sp3 && typeof sp3.executerSP3 === "function") {
+      await sp3.executerSP3();
+    } else {
+      console.log("SP3 non disponible.");
+    }
     return;
   }
 
