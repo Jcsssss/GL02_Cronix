@@ -113,40 +113,6 @@ Ce dossier est accesible que par le professeur pour venir regarder les résultat
 
 **Structure du projet** :
 
-GL02_Cronix/
-│
-├── src/
-│   ├── core/               # Modules logiques
-│   │   ├── giftParser.js
-│   │   ├── questionClassifier.js
-│   │   ├── displayQuestion.js
-│   │   ├── simulateExam.js
-│   │   ├── profiler.js
-│   │   ├── comparator.js
-│   │   └── searchQuestion.js
-│   │
-│   ├── output/             # Modules de génération
-│   │   ├── CreerHistogramme.js
-│   │   ├── AfficherProfil.js
-│   │   └── GenererFichierIdentification.js
-│   │   
-│   │
-│   └── cli/
-│      └── cli.js
-│   
-│   
-│      
-│      
-│
-├── data/                   # fichiers GIFT bruts
-├── review/                 # tests manuels
-├── results/                # résultats des tests étudiants
-│
-├── tests/                  # tests automatisés
-│   ├── giftParser.test.js
-│   ├── simulateExam.test.js
-│   └── profiler.test.js
-│
-├── package.json
-├── README.md
-└── .gitignore
+<p align="center">
+  <img src="assets/organisation" alt="Structure du projet" width="500">
+</p>
