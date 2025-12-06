@@ -22,7 +22,7 @@ CHARLET-SOMLETTE Jules.
 Au besoin : <code>npm install canvas</code>
 
 **Dépendances:**
-
+canvas : 3.2.0
 
 **Explications des écarts au cahier des charges:**
 
