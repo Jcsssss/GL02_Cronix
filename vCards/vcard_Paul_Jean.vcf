@@ -1,0 +1,8 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Jean;Paul
+FN:Paul Jean
+EMAIL:test
+TEL:a
+NOTE:Matières: a | Établissements: a
+END:VCARD

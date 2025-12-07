@@ -1,0 +1,8 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Petit;Paul
+FN:Paul Petit
+EMAIL:test
+TEL:1
+NOTE:Matières: a | Établissements: a
+END:VCARD
