@@ -160,6 +160,7 @@ export function ecrireTestFichier(testCreated){
     //Pour chaque question, ecrire ce qu'il y a dans question.raw
     for(let i=0;i<testCreated.questions.length;i++){
         fileContent+=testCreated.questions[i].raw;
+        fileContent+='\n';
     }
     const fileName=`${testCreated.name}.gift`;
     
@@ -179,3 +180,5 @@ export function ask(question) {
     resolve(answer.trim());
   }));
 }
+
+
