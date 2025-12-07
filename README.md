@@ -17,9 +17,13 @@ CHARLET-SOMLETTE Jules.
 
 **Aide et installation :**
 
-```bash npm install```
+```bash
+npm install
+```
 
-Au besoin : ```bash npm install canvas ```
+Au besoin : ```bash 
+npm install canvas 
+```
 
 **Dépendances:**
 
