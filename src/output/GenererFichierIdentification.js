@@ -52,6 +52,7 @@ NOTE:Matières: ${matieres} | Établissements: ${etablissements}
 END:VCARD
 `;
 
+  // Le dossier est créé automatiquement par ensureDirectories()
   if (!fs.existsSync(VCARDS_DIR)) {
     fs.mkdirSync(VCARDS_DIR, { recursive: true });
   }
@@ -59,5 +60,5 @@ END:VCARD
   const outPath = path.join(VCARDS_DIR, fileName);
   fs.writeFileSync(outPath, vcard, "utf-8");
 
-  console.log(`\nvCard générée → ${outPath}\n`);
+  console.log(`\n✅ vCard générée → ${outPath}\n`);
 }
