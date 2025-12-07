@@ -17,9 +17,9 @@ CHARLET-SOMLETTE Jules.
 
 **Aide et installation :**
 
-<code>npm install</code>
+```bash npm install```
 
-Au besoin : <code>npm install canvas</code>
+Au besoin : ```bash npm install canvas ```
 
 **Dépendances:**
 
@@ -95,9 +95,8 @@ Sortie :
 Multiple choice :
 
 
-```bash ::Q1:: Who invented the telephone?
-{~Edison ~Tesla =Bell}
-```
+<code>::Q1:: Who invented the telephone?
+{~Edison ~Tesla =Bell}</code>
 
 Open cloze :
 
