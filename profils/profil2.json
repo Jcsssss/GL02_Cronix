@@ -1,0 +1,24 @@
+{
+  "total_questions": 200,
+  "counts": {
+    "multiple": 100,
+    "vrai_faux": 0,
+    "appariement": 0,
+    "mot_manquant": 0,
+    "numerique": 100,
+    "courte": 0,
+    "ouverte": 0,
+    "inconnu": 0
+  },
+  "percentages": {
+    "multiple": 50,
+    "vrai_faux": 0,
+    "appariement": 0,
+    "mot_manquant": 0,
+    "numerique": 50,
+    "courte": 0,
+    "ouverte": 0,
+    "inconnu": 0
+  },
+  "generated_at": "2025-12-07T19:29:45.143Z"
+}
