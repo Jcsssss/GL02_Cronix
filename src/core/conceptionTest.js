@@ -48,7 +48,7 @@ export async function createTest(idUser,nameTest){
     
 }
 export function AfficherQuestions(content,beginning){
-    let input='data/SujetB_data/';// variable a determiner en fonction de la structure de l'application
+    let input='../../data/';// variable a determiner en fonction de la structure de l'application
     let questions=searchQuestion(content,beginning, input);
     //Affichage des titres et des indices des questions-----------------------
     let indexForquestions=0;
@@ -163,9 +163,11 @@ export function ecrireTestFichier(testCreated){
         fileContent+='\n';
     }
     const fileName=`${testCreated.name}.gift`;
+    if(fileContent.length>1){
+        fs.writeFileSync(fileName,fileContent , "utf-8");
+    }
     
     
-    fs.writeFileSync(fileName,fileContent , "utf-8");
     
     
 }
