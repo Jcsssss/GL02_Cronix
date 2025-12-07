@@ -21,7 +21,9 @@ CHARLET-SOMLETTE Jules.
 npm install
 ```
 
-Au besoin : ```bash 
+Au besoin : 
+
+```bash 
 npm install canvas 
 ```
 
