@@ -2,7 +2,9 @@
 // SP3 : Génération d'une vCard enseignant via console
 
 import fs from "fs";
+import path from "path";
 import readline from "readline";
+import { VCARDS_DIR } from "../config/config.js";
 
 function ask(question) {
   const rl = readline.createInterface({
@@ -21,7 +23,6 @@ export async function executerSP3() {
   const nom = await ask("Nom de l'enseignant : ");
   const prenom = await ask("Prénom de l'enseignant : ");
 
-  // Liste simple (si vous avez une base après, remplacer ici)
   console.log("\nEnseignant(s) trouvé(s) :");
   console.log(`- [1] ${prenom} ${nom}\n`);
 
@@ -51,6 +52,12 @@ NOTE:Matières: ${matieres} | Établissements: ${etablissements}
 END:VCARD
 `;
 
-  fs.writeFileSync(fileName, vcard, "utf-8");
-  console.log(`\nvCard générée → ${fileName}\n`);
+  if (!fs.existsSync(VCARDS_DIR)) {
+    fs.mkdirSync(VCARDS_DIR, { recursive: true });
+  }
+
+  const outPath = path.join(VCARDS_DIR, fileName);
+  fs.writeFileSync(outPath, vcard, "utf-8");
+
+  console.log(`\nvCard générée → ${outPath}\n`);
 }
