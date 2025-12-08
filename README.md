@@ -4,9 +4,9 @@ Ce projet consiste à réaliser pour le Ministère de l’Éducation nationale d
 
 **Membres :**
 
-BERMUDEZ Lucas,
-HUANG Jia Rui,
-CHARLET-SOMLETTE Jules.
+ - BERMUDEZ Lucas,
+ - HUANG Jia Rui,
+ - CHARLET-SOMLETTE Jules.
 
 **Langage:**
 
