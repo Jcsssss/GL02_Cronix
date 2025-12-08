@@ -265,7 +265,7 @@ Word formation :
 
 Tout est centralisé dans 
 
-<code> ./results/exam<fichier>_<timestamp>.json</code>
+<code> ./results/
 
 Ce dossier est accessible que par les professeurs pour venir regarder les résultats de leurs étudiants. Chaque fichier contient l'identifiant de l'étudiant, son % de bonnes réponses, son nombre de bonnes réponses, son heure de passage de l'examen ainsi que toutes ses réponses et les réponses attendues détaillées.
 
