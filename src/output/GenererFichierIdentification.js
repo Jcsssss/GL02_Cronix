@@ -1,5 +1,5 @@
 // GenererFichierIdentification.js
-// SP3 : Génération d'une vCard enseignant via console
+// Génération d'une vCard enseignant via la console
 
 import fs from "fs";
 import path from "path";
