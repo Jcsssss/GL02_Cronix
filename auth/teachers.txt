@@ -1,0 +1,16 @@
+# IDENTIFIANTS ET MOTS DE PASSE ENSEIGNANTS.
+
+ID:prof1@utt.fr
+mdp:password123
+
+ID:prof2@utt.fr
+mdp:secure456
+
+ID:test3@gmail.com
+mdp:test3*!
+
+ID:test4@gmail.com
+mdp:abc
+
+ID:test@gmail.com
+mdp:1234
