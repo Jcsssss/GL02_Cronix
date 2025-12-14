@@ -5,7 +5,7 @@ import fs from "fs";
 export function parseGiftFile(path) {
   const raw = fs.readFileSync(path, "utf8");
 
-  // Nettoyage minimal
+  // Nettoyage
   const cleaned = raw
     .replace(/\r/g, "")
     .replace(/\/\/.*$/gm, "")   // supprime les commentaires //...
@@ -47,6 +47,3 @@ export function parseGiftFile(path) {
 
   return questions;
 }
-
-
-console.log(parseGiftFile("./test 4.gift"));
