@@ -1,0 +1,246 @@
+{
+  "studentId": "anonyme",
+  "file": "test_complet.gift",
+  "timestamp": "2025-12-08T19:39:36.487Z",
+  "totalQuestions": 33,
+  "correctCount": 4,
+  "percent": 12.1,
+  "answers": [
+    {
+      "question": "EM U4 p32 Review 1 MultiChoice – Gap 1",
+      "user": "similar to",
+      "correct": [
+        "similar to"
+      ]
+    },
+    {
+      "question": "EM U4 p32 Review 1 MultiChoice – Gap 2",
+      "user": "gave",
+      "correct": [
+        "took"
+      ]
+    },
+    {
+      "question": "EM U4 p32 Review 1 MultiChoice – Gap 3",
+      "user": "focus",
+      "correct": [
+        "attention"
+      ]
+    },
+    {
+      "question": "EM U4 p32 Review 1 MultiChoice – Gap 4",
+      "user": "made",
+      "correct": [
+        "made"
+      ]
+    },
+    {
+      "question": "EM U4 p32 Review 1 MultiChoice – Gap 5",
+      "user": "sets",
+      "correct": [
+        "puts"
+      ]
+    },
+    {
+      "question": "EM U4 p32 Review 1 MultiChoice – Gap 6",
+      "user": "stronger",
+      "correct": [
+        "deeper"
+      ]
+    },
+    {
+      "question": "EM U4 p32 Review 1 MultiChoice – Gap 7",
+      "user": "ingredients",
+      "correct": [
+        "ingredients"
+      ]
+    },
+    {
+      "question": "EM U4 p32 Review 1 MultiChoice – Gap 8",
+      "user": "intentions",
+      "correct": [
+        "goals"
+      ]
+    },
+    {
+      "question": "EM U4 p32 Review 1 MultiChoice – Gap 9",
+      "user": "against",
+      "correct": [
+        "contrary"
+      ]
+    },
+    {
+      "question": "EM U4 p32 Review 2 OpenCloze – Gap 1",
+      "user": "a",
+      "correct": [
+        "like"
+      ]
+    },
+    {
+      "question": "EM U4 p32 Review 2 OpenCloze – Gap 2",
+      "user": "a",
+      "correct": [
+        "If"
+      ]
+    },
+    {
+      "question": "EM U4 p32 Review 2 OpenCloze – Gap 3",
+      "user": "a",
+      "correct": [
+        "what"
+      ]
+    },
+    {
+      "question": "EM U4 p32 Review 2 OpenCloze – Gap 4",
+      "user": "a",
+      "correct": [
+        "who",
+        "that"
+      ]
+    },
+    {
+      "question": "EM U4 p32 Review 2 OpenCloze – Gap 5",
+      "user": "a",
+      "correct": [
+        "there"
+      ]
+    },
+    {
+      "question": "EM U4 p32 Review 2 OpenCloze – Gap 6",
+      "user": "a",
+      "correct": [
+        "most"
+      ]
+    },
+    {
+      "question": "EM U4 p32 Review 2 OpenCloze – Gap 7",
+      "user": "a",
+      "correct": [
+        "a"
+      ]
+    },
+    {
+      "question": "EM U4 p32 Review 2 OpenCloze – Gap 8",
+      "user": "a",
+      "correct": [
+        "each",
+        "each other"
+      ]
+    },
+    {
+      "question": "EM U4 p32 Review 2 OpenCloze – Gap 9",
+      "user": "a",
+      "correct": [
+        "It"
+      ]
+    },
+    {
+      "question": "EM U4 p33 Review 3 Word formation – Gap 1",
+      "user": "a",
+      "correct": [
+        "variety"
+      ]
+    },
+    {
+      "question": "EM U4 p33 Review 3 Word formation – Gap 2",
+      "user": "a",
+      "correct": [
+        "excitement"
+      ]
+    },
+    {
+      "question": "EM U4 p33 Review 3 Word formation – Gap 3",
+      "user": "a",
+      "correct": [
+        "motivation"
+      ]
+    },
+    {
+      "question": "EM U4 p33 Review 3 Word formation – Gap 4",
+      "user": "a",
+      "correct": [
+        "limits"
+      ]
+    },
+    {
+      "question": "EM U4 p33 Review 3 Word formation – Gap 5",
+      "user": "a",
+      "correct": [
+        "dissatisfaction"
+      ]
+    },
+    {
+      "question": "EM U4 p33 Review 3 Word formation – Gap 6",
+      "user": "a",
+      "correct": [
+        "competitive"
+      ]
+    },
+    {
+      "question": "EM U4 p33 Review 3 Word formation – Gap 7",
+      "user": "a",
+      "correct": [
+        "professional"
+      ]
+    },
+    {
+      "question": "EM U4 p33 Review 3 Word formation – Gap 8",
+      "user": "a",
+      "correct": [
+        "financial"
+      ]
+    },
+    {
+      "question": "EM U4 p33 Review 3 Word formation – Gap 9",
+      "user": "a",
+      "correct": [
+        "achievements"
+      ]
+    },
+    {
+      "question": "EM U4 p33 Review 4.1 more irritating than",
+      "user": "a",
+      "correct": [
+        "more irritating than#comparative"
+      ]
+    },
+    {
+      "question": "EM U4 p33 Review 4.3 so excited by/about",
+      "user": "a",
+      "correct": [
+        "were so excited by",
+        "were so excited about#phrase: so ... that ..."
+      ]
+    },
+    {
+      "question": "EM U4 p33 Review 4.2 interesting for/to",
+      "user": "a",
+      "correct": [
+        "is very interesting for",
+        "is very interesting to#change of adjective form: interested – interesting"
+      ]
+    },
+    {
+      "question": "EM U4 p33 Review 4.4 worried by",
+      "user": "a",
+      "correct": [
+        "get very worried about",
+        "get very worried by#change of adjective to verb"
+      ]
+    },
+    {
+      "question": "EM U4 p33 Review 4.5 boring",
+      "user": "a",
+      "correct": [
+        "find it boring#change of adjective form: bored – boring"
+      ]
+    },
+    {
+      "question": "EM U4 p33 Review 4.6 for the first time",
+      "user": "a",
+      "correct": [
+        "I saw a glacier for#I had never seen – I saw ... for the first time"
+      ]
+    }
+  ]
+}
